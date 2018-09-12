@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/Template">
+
+<head>
+<title>.:: Notinha WEB ::.</title>
+</head>
+<section layout:fragment="titulo">
+	<h1>Cadastro de Cliente</h1>
+</section>
+
+
+<section layout:fragment="conteudo">
+	<form  method="POST" th:action="@{/cliente}" th:object="${cliente}" name="cliente">
+		
+		<div class="container-fluid" >
+			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+				<div th:each="detailedError : ${#fields.detailedErrors()}">
+					<span th:text="${detailedError.message}"></span>
+				</div>
+			</div>
+			<div class="row">			
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('id')} ? has-error">
+					<label for="id" class="control-label">Código</label>
+					<input type="text" class="form-control" id="id" th:field="*{id}" maxlength="10"/>
+				</div>
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('tipoPessoa')} ? has-error">
+					<label for="tipoPessoa" class="control-label">Tipo Pessoa</label>
+					<select class="form-control" name="tipoPessoa" th:field="*{tipoPessoa}" onchange="trocaPfPj()">
+						<option value=""></option>
+						<option th:value="PF" th:text="Física"></option>
+						<option th:value="PJ" th:text="Jurídica"></option>
+                    </select>
+             	</div>
+				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('cpfCnpj')} ? has-error">
+					<label id="lbCpfCnpj" for="cpfCnpj" class="control-label">CPF</label>
+					<input type="text" class="form-control" id="cpfCnpj" th:field="*{cpfCnpj}" onkeypress="mascara(this,cpf)"/>
+				</div>
+			</div>
+      		
+			<div class="row">
+				<div class="col-md-12 form-group" th:classAppend="${#fields.hasErrors('nomeRazao')} ? has-error">
+					<label id="lbnomeRazao" for="nomeRazao" class="control-label" >Nome / Razão Social</label>
+					<input type="text" class="form-control" id="nomeRazao" th:field="*{nomeRazao}"/>
+				</div>			
+			</div>
+			<div class="row">
+				<div class="col-md-12 form-group" th:classAppend="${#fields.hasErrors('nomeFantasia')} ? has-error">
+					<label for="nomeFantasia" class="control-label">Nome Fantasia</label>
+					<input type="text" class="form-control" id="nomeFantasia" th:field="*{nomeFantasia}"/>
+				</div>			
+			</div>
+			<div class="row">			
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('telefone')} ? has-error">
+					<label for="telefone" class="control-label">Telefone</label>
+					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" maxlength="14"/>
+				</div>
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('tipoPessoa')} ? has-error">
+					<label for="celular" class="control-label">Celular</label>
+					<input type="text" class="form-control" id="celular" th:field="*{celular}" maxlength="15"/>
+             	</div>
+				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('email')} ? has-error">
+					<label for="email" class="control-label">Email</label>
+					<input type="text" class="form-control" id="cpfCnpj" th:field="*{email}"/>
+				</div>
+			</div>
+			<div class="row">			
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('contato')} ? has-error">
+					<label for="contato" class="control-label">Contato</label>
+					<input type="text" class="form-control" id="contato" th:field="*{contato}" maxlength="30"/>
+				</div>
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('tipoPessoa')} ? has-error">
+					<label for="cep" class="control-label">CEP</label>
+					<input type="text" class="form-control" id="cep" th:field="*{cep}" maxlength="9"
+						onblur="buscarCEP(this, pesquisacep)" onkeypress="mascara(this,ceps)"/>
+             	</div>
+				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('endereco')} ? has-error">
+					<label for="endereco" class="control-label">Lagradouro</label>
+					<input type="text" class="form-control" id="endereco" th:field="*{endereco}"/>
+				</div>
+			</div>
+			<div class="row">			
+				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('bairro')} ? has-error">
+					<label for="bairro" class="control-label">Bairro</label>
+					<input type="text" class="form-control" id="bairro" th:field="*{bairro}" maxlength="30"/>
+				</div>
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('cidade')} ? has-error">
+					<label for="cidade" class="control-label">Cidade</label>
+					<input type="text" class="form-control" id="cidade" th:field="*{cidade}" maxlength="30"/>
+             	</div>
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('uf')} ? has-error">
+					<label for="uf" class="control-label">Estado</label>
+					<input type="text" class="form-control" id="uf" th:field="*{uf}" max="2"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 form-group" th:classAppend="${#fields.hasErrors('obs')} ? has-error">
+					<label for="obs" class="control-label">Observações</label>
+					<textarea rows="3" class="form-control" id="obs" th:field="*{obs}" style="resize: none"></textarea> 
+				</div>			
+			</div>
+			
+			<hr/>
+			
+			<div class="col-md-12 form-group text-center">
+				<button type="submit" class="btn btn-lg btn-danger col-md-3" style="margin-right: 10px">Limpar</button>
+				<button type="submit" class="btn btn-lg btn-success col-md-3">Salvar</button>
+			</div>
+		
+		</div><!-- div container-fluid   -->
+		
+		
+		
+
+	</form>
+</section>
+</html>

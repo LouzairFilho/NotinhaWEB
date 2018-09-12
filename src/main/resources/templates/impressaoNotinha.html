@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/Template">
+
+<head>
+<title>.:: Notinha WEB ::.</title>
+</head>
+
+
+<section layout:fragment="titulo">
+	
+</section>
+
+<section layout:fragment="conteudo">
+
+		<div class="col-md-1">
+		</div>
+		
+		<div class="col-md-10" th:object="${notinha}" id="div-notinha" >
+		
+		<table style="width: 100%; border-bottom: 1px solid; padding: 0px" >
+			<tr>
+				<td rowspan="3" align="center" style="width: 70%">
+					<h1><b>Nota de Serviço</b></h1>
+				</td>
+			</tr>
+			<tr>
+				<td align="right" style="width: 15%"><label>Nº Nota: </label> </td>
+				<td align="left" style="width: 15%; padding-left: 5px;"><label th:text="*{id}"></label> </td>
+			</tr>
+			<tr>
+				<td align="right"><label>Data Nota: </label> </td>
+				<td align="left" style="padding-left: 5px;"><label th:text="*{dataView}"></label> </td>
+			</tr>
+			<tr>
+				<td align="center" style="width: 70%">
+					<h3><b>LM Bordados Computadorizados</b></h3>
+				</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<table style="width: 100%;" >
+		<tr>
+			<td>
+				<label th:text="'Cliente: ' + *{cliente.nomeRazao}"></label>
+			</td>
+			<td>
+				<label th:text="'CPF/CNPJ: ' + *{cliente.cpfCnpjView}"></label>
+			</td>
+		</tr>
+		<tr>
+			<td >
+				<label th:text="'Nome Fantasia: ' + *{cliente.nomeFantasia}"></label>
+			</td>
+		</tr>
+		<tr>
+			<td >
+				<label th:text="'Telefones: ' + *{cliente.telefones}"></label>
+			</td>
+			<td></td>
+		</tr>
+		
+		
+		</table>
+		
+		<table style="width: 100%; border: 1px solid; ">
+			<tr >
+				<td width="15%" style="padding-left: 5px"> <b> Código </b> </td>
+				<td width="40%" style="padding-left: 5px" ><b> Descrição </b> </td>
+				<td width="15%" align="center"> <b> Valor </b>  </td>
+				<td width="15%" align="center"> <b> Quant. </b>  </td>
+				<td width="15%" align="center"> <b> V. Total  </b> </td>
+			</tr>
+			
+		</table>
+		<table style="width: 100%">
+			<tbody>
+			<tr th:each="it : ${itemNotinha}">
+				<td width="15%" style="padding-left: 5px" th:text="${it.produto.codigo}"></td>
+				<td width="40%" style="padding-left: 5px" th:text="${it.produto.descricao}"></td>
+				<td width="15%" align="center" th:text="'R$ '+${it.valorItem}"></td>
+				<td width="15%" align="center" th:text="${it.quantidade}"></td>
+				<td width="15%" align="center" th:text="'R$ '+${it.valorTotal}"></td>
+			</tr>
+			</tbody>
+		</table>
+		<table style="width: 100%; margin-top: 100px;border: 1px solid;  " >
+				<tr >
+					<td width="55%" style="padding-left: 5px" ><b>  </b> </td>
+					<td width="15%" align="center"> <b> Totais </b>  </td>
+					<td width="15%" align="center" th:text="*{quantItens}"> > <b>  </b>  </td>
+					<td width="15%" align="center" th:text="'R$ '+*{valorNotinha}">> <b>   </b> </td>
+				</tr>
+				
+			
+		</table>
+		<table style="width: 100%" >
+				<tr>
+					<td align="center">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</td>
+				</tr>
+		</table>
+		<br/>
+		<table style="width: 100%; border-bottom: 1px solid; border-top: 1px solid;"  >
+		
+		<tr>
+			<td>
+				<label th:text="'Cliente: ' + *{cliente.nomeRazao}"></label>
+			</td>
+			<td>
+				<label th:text="'CPF/CNPJ: ' + *{cliente.cpfCnpjView}"></label>
+			</td>
+		</tr>
+		<tr>
+			<td >
+				<label th:text="'Nome Fantasia: ' + *{cliente.nomeFantasia}"></label>
+			</td>
+		</tr>
+		<tr>
+			<td >
+				<label th:text="'Telefones: ' + *{cliente.telefones}"></label>
+			</td>
+			<td></td>
+		</tr>
+		</table>
+		
+		<table style="width: 100%; margin-top: 10px"  >
+			<tr>
+				<td>
+				<label th:text="'Nº Nota: ' + *{id}"></label>
+			</td>
+			<td>
+				<label th:text="'Data Nota: ' + *{dataView}"></label>
+			</td>
+			<td>
+				<label th:text="'Quant: ' + *{quantItens}"></label>
+			</td>
+			<td>
+				<label th:text="'valor: ' + 'R$ '+*{valorNotinha}"></label>
+			</td>
+			
+			</tr>
+		</table>
+		<table style="width: 100%; margin-top: 40px"  >
+			<tr style="margin-top: 50px">
+				<td align="center">_____________________________________________</td>			
+			</tr>
+			<tr>
+				<td colspan="4" align="center">Assinatura</td>			
+			</tr>
+		</table>
+		
+	</div>	
+	
+	
+	
+	<div class="col-md-1">
+	</div>
+	
+	<div class="col-md-12">
+		<hr/>
+	</div>
+	
+	<div class="col-md-2">
+	</div>
+	
+	<div class="col-md-10 text-center" style="margin-top: 20px; text-align: center;" >
+	
+	<button type="button" class="btn btn-danger col-md-2" style="margin-left: 20px" onclick="imprimirNotinha()"> 
+		<span class="glyphicon glyphicon-print"></span> Imprimir
+	</button>
+	
+	<a th:href="@{/notinha/pesquisa}" class="btn btn-danger col-md-2" style="margin-left: 20px" > 
+		<span class="fa fa-table"></span> Notinhas
+	</a>
+	
+	<a th:href="@{/notinha/editar/{id}(id=${notinha.id})}" class="btn btn-danger col-md-2" style="margin-left: 20px" > 
+		<span class="glyphicon glyphicon-edit"></span> Editar Notinha
+	</a>
+	
+	<a th:href="@{/notinha/novo}" class="btn btn-danger col-md-2" style="margin-left: 20px" > 
+		<span class="glyphicon glyphicon-edit"></span> Nova Notinha
+	</a>
+	
+	</div>
+
+
+</section>
+</html>

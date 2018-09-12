@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/Template">
+
+<head>
+<title>.:: Notinha WEB ::.</title>
+</head>
+
+
+<section layout:fragment="titulo">
+	<h1>Produtos</h1>
+</section>
+
+<section layout:fragment="conteudo">
+	<div class="container-fluid">
+	
+
+	<div class="row">
+		<div class=" div-tabela col-md-12">
+			<table class="table table-striped table-hover table-condensed table-bordered table-condensed">
+				<thead>
+					<tr class="tituloTabela">
+						<th class="text-center col-md-1">codigo</th>
+						<th class="text-center col-md-5">Cliente</th>
+						<th class="text-center col-md-2">CPF / CNPJ</th>
+						<th class="text-center col-md-3">Telefones</th>
+						<th class="text-center col-md-1">#</th>
+						
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="cli : ${listClintes}">
+						
+					
+						<td th:text="${cli.id}"></td>
+						<td >
+							<span th:text="${cli.nomeRazao}" ></span><br/>
+							<span th:text="${cli.nomeFantasia}" ></span>
+						</td>
+						<td th:text="${cli.cpfCnpjView}" class="text-center"></td>
+						<td th:text="${cli.telefones}" class="text-center"></td>
+						
+						
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" th:href="@{/cliente/editar/{id}(id=${cli.id})}" 
+			   					title="Editar" rel="tooltip" data-placement="top" >
+		   						<span class="glyphicon glyphicon-pencil"></span>
+		   					</a>
+				   			<a class="btn btn-link btn-xs"  th:href="@{/cliente/excluir/{id}(id=${cli.id})}" 
+				   				title="Excluir" rel="tooltip" data-placement="top" >
+				   				<span class="glyphicon glyphicon-remove"></span>
+				   			</a>
+						</td>
+					
+					</tr>
+					<tr>
+		   				<td colspan="5" th:if="${#lists.isEmpty(listClintes)}" >Nenhum registro foi encontrado</td>
+		   			</tr>
+
+
+				</tbody>
+			</table>
+		</div>
+		</div>
+		
+	</div>
+</section>
+</html>

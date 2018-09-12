@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/Template">
+
+<head>
+<title>.:: Apontamento ::.</title>
+</head>
+
+
+<section layout:fragment="titulo">
+	<h1>Apontamentos</h1>
+</section>
+
+<section layout:fragment="conteudo">
+	<div class="container-fluid">
+	
+
+	<div class="row">
+		<div class="alert alert-sucess" th:if="!${mensagem.isEmpty}">
+				<div >
+					<span th:text="${mensagem}"></span>
+				</div>
+			</div>
+		<div class=" div-tabela col-md-12">
+			<table class="table table-striped table-hover table-condensed table-bordered table-condensed">
+				<thead>
+					<tr bgcolor="#3dbd99">
+						<th class="text-center col-md-1">#</th>
+						<th class="text-center col-md-1">Tipo</th>
+						<th class="text-center col-md-1">Solicitante</th>
+						<th class="text-center col-md-2">Entrada</th>
+						<th class="text-center col-md-1">P. Exec.</th>
+						<th class="col-md-3">Decrição</th>
+						<th class="text-center col-md-3">Execução</th>
+						
+						<th class="col-md-1">Status</th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="apont : ${apontamentos}">
+						<td>
+							<a class="btn btn-link btn-xs" 
+		   							title="Editar" rel="tooltip" data-placement="top" >
+		   							<span class="glyphicon glyphicon-pencil"></span>
+		   						</a>
+		   						<a class="btn btn-link btn-xs"
+		   							title="Excluir" rel="tooltip" data-placement="top" >
+		   							<span class="glyphicon glyphicon-remove"></span>
+		   						</a>
+						
+						
+						
+						</td>
+					
+						<td th:text="${apont.tipo.descricao}"></td>
+						<td th:text="${apont.solicitante.nome}"></td>
+						<td th:text="|${{apont.dataEntrada}} AS ${{apont.horaEntrada}}|" class="text-center" ></td>
+						<td th:text="${{apont.prazoExecucao}}" class="text-center" ></td>
+						<td th:text="${apont.descricao}"></td>
+						<td th:text="|${{apont.dataExecucao}} ${{apont.inicioExecucao}} A ${{apont.fimExecucao}}|" class="text-center" ></td>
+						<td class="text-center">
+		   						<span class="label" th:text="${apont.status.descricao}"
+		   							th:classappend="${apont.pendente ? 'label-danger' : 'label-success'}"></span>
+		   					</td>
+						
+					
+					</tr>
+					<tr>
+		   				<td colspan="7" th:if="${#lists.isEmpty(apontamentos)}">Nenhum registro foi encontrado</td>
+		   			</tr>
+
+
+				</tbody>
+			</table>
+		</div>
+		</div>
+		<br/>
+		<div class="row  div-apont">
+			<div class="panel panel-default col-md-4" th:each="apont : ${apontamentos}">
+			  <div class="panel-heading">
+			  	<label th:text="${apont.descricao}"></label>
+			  </div>
+			  <div class="panel-body">
+			   		<table class="table table-condensed">
+			   			<tr>
+			   				<td class="text-right" style="width: 30%; border-top: none;"><b>Tipo:</b> </td>
+			   				<td class="text-left" style="width: 70%; border-top: none;"><label th:text="${apont.tipo.descricao}"></label></td>
+			   			</tr>
+			   			<tr>
+			   				<td class="text-right" style="width: 30%; border-top: none;"><b>Solicitante:</b> </td>
+			   				<td class="text-left" style="width: 70%; border-top: none;"><label th:text="${apont.solicitante.nome}"></label></td>
+			   			</tr>
+			   			<tr>
+			   				<td class="text-right" style="width: 30%; border-top: none;"><b>Entrada:</b> </td>
+			   				<td class="text-left" style="width: 70%; border-top: none;"><label th:text="|${{apont.dataEntrada}} AS ${{apont.horaEntrada}}|"></label></td>
+			   			</tr>
+			   			<tr>
+			   				<td class="text-right" style="width: 30%; border-top: none;"><b>P. Exec:</b> </td>
+			   				<td class="text-left" style="width: 70%; border-top: none;"><label th:text="${{apont.prazoExecucao}}"></label></td>
+			   			</tr>
+			   			<tr>
+			   				<td colspan="2" th:classappend="${apont.pendente ? 'label-danger' : 'label-success'}" class="text-center">
+			   					<label style="color: white;" th:text="${apont.status.descricao}"></label>
+			   				</td>
+			   			</tr>
+			   		</table>
+			   	</div> 
+			   	<div class="panel-footer text-center">
+			   		<a class="btn btn-link btn-xs" th:href="@{/apontamento/{id}(id=${apont.id})}" 
+			   			title="Editar" rel="tooltip" data-placement="top" >
+		   				<span class="glyphicon glyphicon-pencil"></span>
+		   			</a>
+		   			<a class="btn btn-link btn-xs" title="Excluir" rel="tooltip" data-placement="top" >
+		   				<span class="glyphicon glyphicon-remove"></span>
+		   			</a>
+			   	</div>
+			 </div>
+			
+			
+		
+		
+		
+		<!-- 
+			<div class=" cards card-apont col-md-3" th:each="apont : ${apontamentos}" style="border: 1px solid;">
+				
+				<label th:text="${apont.solicitante.nome}"></label><br/>
+				<label th:text="|${{apont.dataEntrada}} AS ${{apont.horaEntrada}}|" class="text-center" ></label><br/>
+				<label th:text="${{apont.prazoExecucao}}" class="text-center" ></label><br/>
+				<label th:text="${apont.descricao}"></label><br/>
+				<label th:text="|${{apont.dataExecucao}} ${{apont.inicioExecucao}} A ${{apont.fimExecucao}}|" class="text-center" ></label><br/>
+				
+			</div>
+		 -->
+			
+		</div>
+		
+		
+		
+	</div>
+</section>
+</html>

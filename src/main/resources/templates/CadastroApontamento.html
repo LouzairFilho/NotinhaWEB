@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/template/Template">
+
+<head>
+<title>.:: Apontamento ::.</title>
+</head>
+<section layout:fragment="titulo">
+	<h1>Cadastro de Apontamento</h1>
+</section>
+
+
+<section layout:fragment="conteudo">
+	<form  method="POST" th:action="@{/apontamento}"
+		th:object="${apontamentoProducao}">
+		
+		<div class="container-fluid" >
+			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+				<div th:each="detailedError : ${#fields.detailedErrors()}">
+					<span th:text="${detailedError.message}"></span>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{id}" />
+			<div class="row">
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('idSolicitante')} ? has-error">
+					<label for="solicitante" class="control-label">Solicitante</label>
+					<select class="form-control" name="idSolicitante" th:field="*{idSolicitante}" >
+						<option value=""></option>
+						<option th:each="solicitante : ${todosSolicitantes}" th:value="${solicitante.id}" th:text="${solicitante.nome}"></option>
+                    </select>
+				</div>
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('descricao')} ? has-error">
+					<label for="tipo" class="control-label">Tipo de Solicitação</label>
+					<select class="form-control" name="tipo" th:field="*{tipo}" >
+						<option value=""></option>
+						<option th:each="tipo : ${todosTipoApontamento}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
+                    </select>	
+				</div>
+				<div class="col-md-2 form-group" th:classAppend="${#fields.hasErrors('dataEntrada')} ? has-error">
+					<label for="dataEntrada" class="control-label">Data de Entrada</label>
+					<input type="text" class="form-control" id="dataEntrada" th:field="*{dataEntrada}"
+						data-provide="datepicker" data-date-formate="dd/mm/yyyy" data-date-language="pt-BR"
+						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+				</div>
+				
+				<div class="col-md-2 form-group" th:classAppend="${#fields.hasErrors('horaEntrada')} ? has-error">
+					<label for="horaEntrada" class="control-label">Hora de Entrada</label>
+					<input type="text" class="form-control" id="horaEntrada" th:field="*{horaEntrada}" OnKeyUp="Mascara_Hora(this.value, horaEntrada)" maxlength="5"/>
+				</div>
+				<div class="col-md-2 form-group" th:classAppend="${#fields.hasErrors('dataEntrada')} ? has-error">
+					<label for="dataEntrada" class="control-label">Prazo de Execução</label>
+					<input type="text" class="form-control" id="dataEntrada" th:field="*{dataEntrada}"
+						data-provide="datepicker" data-date-formate="dd/mm/yyyy" data-date-language="pt-BR"
+						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+				</div>
+				
+				
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12 form-group" th:classAppend="${#fields.hasErrors('descricao')} ? has-error">
+					<label for="descricao" class="control-label">Descrição do Serviço</label>
+					<input type="text" class="form-control" id="descricao" th:field="*{descricao}"/>
+				</div>			
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('insumo')} ? has-error">
+					<label for="insumo" class="control-label">Material Utilizado</label>
+					<textarea class="form-control" id="insumo" th:field="*{insumo}" rows="4"></textarea>
+				</div>
+				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('observacoes')} ? has-error">
+					<label for="observacoes" class="control-label">Observacoes</label>
+					<textarea class="form-control" id="observacoes" th:field="*{observacoes}" rows="4"></textarea>
+				</div>			
+			</div>
+			
+			<div class="row">
+				<div class="col-md-2 form-group" th:classAppend="${#fields.hasErrors('dataExecucao')} ? has-error">
+					<label for="dataExecucao" class="control-label">Data da Execução</label>
+					<input type="text" class="form-control" id="dataExecucao" th:field="*{dataExecucao}"
+						data-provide="datepicker" data-date-formate="dd/mm/yyyy" data-date-language="pt-BR"
+						data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
+				</div>
+				<div class="col-md-2 form-group" th:classAppend="${#fields.hasErrors('inicioExecucao')} ? has-error">
+					<label for="inicioExecucao" class="control-label">H. Inicio Execução</label>
+					<input type="text" class="form-control" id="inicioExecucao" OnKeyUp="Mascara_Hora(this.value, inicioExecucao)" th:field="*{inicioExecucao}"/>
+				</div>
+				<div class="col-md-2 form-group" th:classAppend="${#fields.hasErrors('fimExecucao')} ? has-error">
+					<label for="fimExecucao" class="control-label">H. Fim Execução</label>
+					<input type="text" class="form-control" id="fimExecucao" OnKeyUp="Mascara_Hora(this.value, fimExecucao)" th:field="*{fimExecucao}"/>
+				</div>
+			
+				<div class="col-md-6 form-group">
+					<label for="status" class="control-label">Status</label>
+					<select class="form-control" name="tipo" th:field="*{status}" >
+						<option th:each="status : ${todosStatusApontamento}" th:value="${status}" 
+						th:text="${status.descricao}" ></option>
+                    </select>
+				</div>
+			</div>
+			<hr/>
+			
+			<div class="col-md-12 form-group text-center">
+				<button type="submit" class="btn btn-lg btn-danger col-md-3" style="margin-right: 10px">Limpar</button>
+				<button type="submit" class="btn btn-lg btn-success col-md-3">Salvar</button>
+			</div>
+		
+		</div><!-- div container-fluid   -->
+		
+		
+		
+
+	</form>
+</section>
+</html>

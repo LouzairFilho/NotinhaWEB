@@ -1,0 +1,22 @@
+@page {
+	margin-top: 1cm;
+	margin-left: 3cm;
+	margin-bottom: 2cm;
+	margin-left: 2cm;
+}
+
+
+
+
+#rodape-final {
+	width: 100%;
+	position: absolute;
+	left: 0cm;
+	bottom: 3cm;
+	right: 2cm;
+	font-size: 12px;
+}
+
+#align-right {
+	text-align: right;
+}

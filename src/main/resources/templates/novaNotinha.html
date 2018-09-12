@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/Template">
+
+<head>
+<title>.:: Notinha WEB ::.</title>
+</head>
+
+
+<section layout:fragment="titulo">
+	<h1>Nova Notinha</h1>
+</section>
+
+<section layout:fragment="conteudo">
+	<form method="POST" th:action="@{/notinha}" th:object="${notinha}" name="notinha">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" align="center">
+					 <input type="hidden" th:field="*{id}"/>
+					 <div class="col-md-3 div-card">
+					 	<div>
+					 		<h4> <label>N° Nota:</label></h4>
+					 	</div>
+					 	<div>
+					 		<h1><label th:text="*{id}"></label></h1>
+					 	</div>
+					 </div>
+					 <div class="col-md-3 div-card">
+					 	<div>
+					 		<h4> <label>Data Nota:</label></h4>
+					 	</div>
+					 	<div>
+					 		<h1><label th:text="*{#dates.format(dataNotinha, 'dd/MM/yyyy')}"></label></h1>
+					 	</div>
+					 </div>
+					 <div class="col-md-3 div-card">
+					 	<div>
+					 		<h4> <label>Valor</label></h4>
+					 	</div>
+					 	<div>
+					 		<h1><label th:text="*{valorNotinha}"></label></h1>
+					 	</div>
+					 </div>
+					 
+				
+				</div>
+			</div>
+
+			<br/>
+			<div class="row" >
+				<div class="col-md-2 form-group">
+					<label for="id" class="control-label">Código</label>
+					<div class="input-group">
+				      <input type="text" class="form-control" id="id" th:field="*{cliente.id}" />
+				      <span class="input-group-btn">
+				        <button class="btn btn-danger" type="submit" name="addCliente">
+				        	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				        </button>
+				      </span>
+				    </div>
+				</div>
+				
+				<div class="col-md-5 form-group">
+					<label for="id" class="control-label">Cliente</label>
+					<input type="text" class="form-control" id="id" th:field="*{cliente.nomeRazao}" />
+				</div>
+				<div class="col-md-5 form-group">
+					<label for="id" class="control-label">Nome Fantasia</label>
+					<input type="text" class="form-control" id="id" th:field="*{cliente.nomeFantasia}" />
+				</div>
+			</div>
+			
+			<div class="row" >
+				<div class="col-md-4 form-group">
+					<label for="id" class="control-label">Referência</label>
+					<div class="input-group">
+				      <input type="text" class="form-control" id="codigo" th:field="*{item.produto.codigo}" />
+				      <span class="input-group-btn">
+				        <button class="btn btn-danger" type="submit" name="buscaProduto">
+				        	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				        </button>
+				      </span>
+				    </div>
+				    
+				    <label for="id" class="control-label">Descrição do Produto</label>
+					<textarea class="form-control" id="descricao" th:field="*{item.produto.descricao}" readonly="readonly" rows="4" style="resize: none"></textarea>
+					<input type="hidden" id="idProduto" th:field="*{item.produto.id}" />
+					<div class="col-md-6" style="padding-left: 0px; padding-right: 5px;">
+						<label for="id" class="control-label">Valor</label>
+						<input type="text" class="form-control" id="valorItem" th:field="*{item.valorItem}" />
+					</div>
+					<div class="col-md-6" style="padding-left: 5px; padding-right: 0px;">
+						<label for="id" class="control-label">Quantidade</label>
+						<input type="number" class="form-control" id="quantidade" th:field="*{item.quantidade}" />
+					</div>
+					<button class="btn btn-danger col-md-12 form-group" type="submit" name="addProduto"  style="margin-top: 10px">
+						 Adicionar Produto <span class="glyphicon glyphicon-plus"> </span>
+					</button>
+				</div>
+				
+				<div class="col-md-8">
+				<table class="table table-hover table-striped" id="tbItens">
+					<thead>
+						<tr>
+							<td class="col-md-2" >Código</td>
+							<td class="col-md-4">Descrição</td>
+							<td class="col-md-2">V. Unit</td>
+							<td class="col-md-2">Quant </td>
+							<td class="col-md-2">V. Total</td>
+						</tr>
+					</thead>
+					
+					
+					<tbody>
+						<tr th:each="it : ${itemNotinha}">
+							<td th:text="${it.produto.codigo}"></td>
+							<td th:text="${it.produto.descricao}"></td>
+							<td th:text="${it.valorItem}"></td>
+							<td th:text="${it.quantidade}"></td>
+							<td th:text="${it.valorTotal}"></td>
+						</tr>
+						
+					</tbody>
+				</table>
+				</div>
+			
+			</div>
+			
+			
+			<hr/>
+			
+			<div class="col-md-12 form-group text-center">
+				<button type="submit" class="btn btn-lg btn-danger col-md-3" style="margin-right: 10px">Limpar</button>
+				<button type="submit" class="btn btn-lg btn-success col-md-3" name="salvar">Salvar</button>
+			</div>
+		</div>
+	</form>
+
+</section>
+</html>

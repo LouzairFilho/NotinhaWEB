@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/Template">
+
+<head>
+<title>.:: Notinha WEB ::.</title>
+	<script type="text/javascript">
+	$("#valor").maskMoney({
+		thousands : ".",
+		decimal : ",",
+		symbol : "R$",
+		showSymbol : true,
+		symbolStay : true
+	});
+</script>
+	
+
+</head>
+<section layout:fragment="titulo">
+	<h1>Cadastro de Produto</h1>
+</section>
+
+
+<section layout:fragment="conteudo">
+	<form  method="POST" th:action="@{/produto}" th:object="${produto}">
+		
+		<div class="container-fluid" >
+			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+				<div th:each="detailedError : ${#fields.detailedErrors()}">
+					<span th:text="${detailedError.message}"></span>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{id}" />
+			<div class="row">			
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('codigo')} ? has-error">
+					<label for="codigo" class="control-label">Código</label>
+					<input type="text" class="form-control" id="codigo" th:field="*{codigo}" maxlength="10"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12 form-group" th:classAppend="${#fields.hasErrors('descricao')} ? has-error">
+					<label for="descricao" class="control-label">Descrição</label>
+					<input type="text" class="form-control" id="descricao" th:field="*{descricao}"/>
+				</div>			
+			</div>
+			
+			<div class="row">
+				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('valor')} ? has-error">
+					<label for="valor" class="control-label">Valor</label>
+					<input class="form-control" id="valor" dir="rtl" th:field="*{valor}" onkeypress="mascara(this,moeda)"/>
+				</div>
+				</div>
+			<hr/>
+			
+			<div class="col-md-12 form-group text-center">
+				<button type="submit" class="btn btn-lg btn-danger col-md-3" style="margin-right: 10px">Limpar</button>
+				<button type="submit" class="btn btn-lg btn-success col-md-3">Salvar</button>
+			</div>
+		
+		</div><!-- div container-fluid   -->
+		
+		
+		
+
+	</form>
+</section>
+</html>

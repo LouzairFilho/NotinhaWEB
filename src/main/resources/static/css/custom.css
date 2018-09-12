@@ -1,0 +1,230 @@
+/*=============================================================
+    Authour URI: www.binarycart.com
+    License: Commons Attribution 3.0
+
+    http://creativecommons.org/licenses/by/3.0/
+
+    100% To use For Personal And Commercial Use.
+    IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
+   
+    ========================================================  */
+/*==============================================
+    GENERAL  STYLES    
+    =============================================*/
+body {
+	font-family: 'Open Sans', sans-serif;
+	line-height: 30px;
+}
+
+#logo-topo {
+	padding-bottom: 8px;
+	height: 55px;
+}
+
+#wrapper {
+	width: 100%;
+	margin-top: 50px;
+}
+
+#page-wrapper {
+	padding: 15px 15px;
+	min-height: 600px;
+	background: #F3F3F3;
+}
+
+#page-inner {
+	width: 100%;
+	margin: 10px 10px 10px 0px;
+	background-color: #fff !important;
+	padding: 10px;
+	min-height: 1050px;
+}
+
+.conteudo-pagina {
+	width: 99%;
+	margin-left: 5px;
+}
+
+.pad-top {
+	padding-top: 15px;
+}
+/*==============================================
+    MENU STYLES    
+    =============================================*/
+.sidebar-collapse .nav {
+	padding: 0;
+	padding-top: 50px;
+}
+
+.sidebar-collapse>.nav>li>a {
+	padding: 15px 10px;
+	color: #214761;
+	font-weight: 900;
+	font-size: 16px;
+}
+
+.sidebar-collapse>.nav>li {
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.sidebar-collapse .nav>li>a:hover, .sidebar-collapse .nav>li>a:focus {
+	background: #F3F3F3;
+	outline: 0;
+}
+
+.navbar-side {
+	border: none;
+	background-color: #fff;
+}
+
+.navbar-inverse {
+	background-color: #ad1515;
+	border-color: #F0F0F0;
+	min-height: 80px;
+}
+
+.nav>li>a>i {
+	margin-right: 10px;
+}
+
+.logout-spn {
+	float: right;
+	color: #fff;
+	font-size: 25px;
+	font-weight: 800;
+	margin: 20px;
+	margin: 10px 25px 10px 50px;
+}
+
+.logout-spn a {
+	text-decoration: none;
+}
+
+.active-link {
+	background-color: #f3f3f3;
+}
+
+/*==============================================
+    DASHBOARD STYLES    
+    =============================================*/
+.div-square {
+	padding: 5px;
+	border: 3px double #e1e1e1;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	margin: 5px;
+}
+
+.div-square>a, .div-square>a:hover {
+	color: #808080;
+	text-decoration: none;
+}
+/*==============================================
+    FOOTER STYLES     
+    =============================================*/
+.footer {
+	background-color: #650c0c;
+	width: 100%;
+	color: #fff;
+	padding: 20px 50px 20px 50px;
+	padding-left: 20px;
+}
+
+.footer>a, .footer>a:hover {
+	color: #fff;
+}
+
+.tituloPagina h1 {
+	padding-left: 10px;
+	font-family: "Calibri";
+	font-weight: bold;
+}
+
+.div-tabela {
+	margin-left: 15px;
+	overflow: auto;
+	width: 98%;
+}
+
+.tituloTabela {
+	background-color: #ad1515;
+	color: white;
+}
+
+.div-card {
+	padding-left: 5px;
+	margin-top: -30px;
+	margin-left: 60px;
+	border-color: #808080;
+    border-radius: 5px;
+    height: 82px;
+    box-shadow: 0px 0px 9px 0px #a94442
+}
+
+}
+.div-card h4 {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.div-card h1 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.lb-valor {
+	font-size: 50px;
+	margin-top: 0px;
+	margin-right: 5px;
+}
+
+#btnAddCliente {
+	margin-top: 8px;
+	height: 62px;
+}
+
+#btnAddCliente span {
+	margin-top: 10px;
+	border-right-width: 5px;
+	margin-left: -8px;
+}
+/*==============================================
+    MEDIA QUERIES     
+    =============================================*/
+@media ( min-width :768px) {
+	#page-wrapper {
+		margin: 0 0 0 260px;
+		padding: 15px 30px;
+		min-height: 1050px;
+	}
+	.navbar-side {
+		z-index: 1;
+		position: absolute;
+		width: 260px;
+	}
+}
+
+.div-apont {
+	margin: 10px
+}
+
+.panel-heading {
+	margin-left: -15px;
+	margin-right: -15px;
+}
+
+.panel-footer {
+	margin-left: -15px;
+	margin-right: -15px;
+	height: 30px;
+	vertical-align: middle;
+}
+
+.panel-footer a {
+	margin-top: -18px;
+}
+
+.panel-body {
+	margin: -15px;
+}
