@@ -34,77 +34,13 @@
 					</a>
 				</div>
 
-				<form action="/logout" method="post" class="navbar-form navbar-right">
-		        		
-		        		<button type="submit" class="btn-link">
-		        			<span class="logout-spn " style="color: #fff;">LOGOUT</span>
-		        		</button>
-		        		
-		        		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-			      	</form>
-
-				
-
 			</div>
 		</div>
 		<!-- /. fim barra do topo  -->
 
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
-				<div id='cssmenu'>
-					<ul>
-						<li>
-							<a th:href="@{/}"> <i class="fa fa-bar-chart-o"></i>
-								<span>Dashboard</span>
-							</a>
-						</li>
-					
-						<li class="active has-sub "><a href='#'><i class="glyphicon glyphicon-triangle-right"></i><span>Clientes</span></a>
-							<ul>
-								<li class="has-sub">
-									<a th:href="@{/cliente/pesquisa}">
-										<i class="fa fa-table"></i><span> Clientes</span>
-									</a>
-								</li>
-								<li class="has-sub">
-									<a th:href="@{/cliente/novo}">
-										<i class="fa fa-edit "></i><span> Cadastro</span> 
-									</a>
-								</li>
-							</ul>
-						</li>
-						
-						<li class="active has-sub "><a href='#'><i class="glyphicon glyphicon-triangle-right"></i><span>Notinhas</span></a>
-							<ul>
-								<li class="has-sub">
-									<a th:href="@{/notinha/pesquisa}">
-										<i class="fa fa-table"></i><span> Notinhas</span>
-									</a>
-								</li>
-								<li class="has-sub">
-									<a th:href="@{/notinha/novo}">
-										<i class="fa fa-edit "></i><span> Nova Notinha</span> 
-									</a>
-								</li>
-							</ul>
-						</li>
-						
-						<li class="active has-sub "><a href='#'><i class="glyphicon glyphicon-triangle-right"></i><span>Produtos</span></a>
-							<ul>
-								<li class="has-sub">
-									<a th:href="@{/produto/pesquisa}">
-										<i class="fa fa-table"></i><span> Produtos</span>
-									</a>
-								</li>
-								<li class="has-sub">
-									<a th:href="@{/produto/novo}">
-										<i class="fa fa-edit "></i><span> Cadastro</span> 
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
+				<div id='cssmenu'></div>
 
 
 			</div>
@@ -116,8 +52,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-lg-12 tituloPagina">
-						<section layout:fragment="titulo">
-						</section>
+						<h1>Digite suas Credenciais</h1>
 					</div>
 				</div>
 
@@ -125,9 +60,35 @@
 
 				<div class="row pad-top">
 					<div class="conteudo-pagina">
-						<section layout:fragment="conteudo">
-							<p>Conteúdo principal</p>
-						</section>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-4">
+								<div th:if="${param.error}">
+									<div class="alert alert-danger">Usuário e/ou inválidos!</div>
+								</div>
+
+									
+									<div class="panel-body">
+										<form action="/entrar" method="post">
+											<div class="form-group">
+												<input name="username" class="form-control"
+													placeholder="Usuário" />
+											</div>
+
+											<div class="form-group">
+												<input type="password" name="password" class="form-control"
+													placeholder="Senha" />
+											</div>
+
+											<div class="form-group">
+												<button class="btn btn-danger btn-block">Entrar</button>
+											</div>
+
+											<input type="hidden" th:name="${_csrf.parameterName}"
+												th:value="${_csrf.token}" />
+										</form>
+									</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -138,9 +99,7 @@
 
 
 		<div class="row">
-			<div class="col-lg-12">
-				
-			</div>
+			<div class="col-lg-12"></div>
 		</div>
 	</div>
 
@@ -157,6 +116,6 @@
 	<script th:src="@{/js/buscaCEP.js}"></script>
 	<script th:src="@{/js/clienteJS.js}"></script>
 	<script th:src="@{/js/mascara.js}"></script>
-	
+
 </body>
 </html>
