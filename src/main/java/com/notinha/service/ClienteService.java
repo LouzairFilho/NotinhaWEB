@@ -39,6 +39,23 @@ public class ClienteService {
 		}
 		return cliente;
 	}
+	
+	public Cliente buscaByCpfCnpj(Cliente cliente) {
+
+		Cliente clienteBuscado = new Cliente();
+
+		List<Cliente> listCliente = new ArrayList<Cliente>();
+		
+		cliente.setCpfCnpj(removeMascara(cliente.getCpfCnpj()));
+
+		listCliente = clienteRepository.buscaByCpfCNpj(cliente.getCpfCnpj());
+		if (listCliente.size() > 0) {
+			clienteBuscado = listCliente.get(0);
+			clienteBuscado.setIsAlteracao(true);
+			return clienteBuscado;
+		}
+		return cliente;
+	}
 
 	public List<Cliente> pesquisaCliente(String paramBusca, String campoBusca) {
 		List<Cliente> listCliente = new ArrayList<>();
@@ -65,6 +82,26 @@ public class ClienteService {
 		return listCliente;
 	}
 
+	public void excluir(Integer id) {
+		if (clienteRepository.exists(id)){
+			clienteRepository.delete(id);
+		}
+		
+	}
+
+	private String removeMascara(String cpfCnpj){
+		if(cpfCnpj.contains("/")){
+			cpfCnpj.replace("/", "");
+		}
+		if(cpfCnpj.contains("-")){
+			cpfCnpj.replace("-/", "");
+		}
+		if(cpfCnpj.contains(".")){
+			cpfCnpj.replace(".", "");
+		}
+		return cpfCnpj;
+	}
+	
 	private String removeMascaraCpfCnpf(Cliente cliente){
 		if(cliente.getTipoPessoa().equals("PJ")){
 			cliente.setCpfCnpj(cliente.getCpfCnpj().replace("/", ""));
@@ -77,14 +114,6 @@ public class ClienteService {
 		}
 		return cliente.getCpfCnpj();
 	}
-
-	public void excluir(Integer id) {
-		if (clienteRepository.exists(id)){
-			clienteRepository.delete(id);
-		}
-		
-	}
-
 	
 
 }

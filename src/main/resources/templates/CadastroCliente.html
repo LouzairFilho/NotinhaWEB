@@ -21,22 +21,23 @@
 					<span th:text="${detailedError.message}"></span>
 				</div>
 			</div>
+			
 			<div class="row">			
 				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('id')} ? has-error">
 					<label for="id" class="control-label">Código</label>
-					<input type="text" class="form-control" id="id" th:field="*{id}" maxlength="10"/>
+					<input type="text" class="form-control" id="idCliente" th:field="*{id}" maxlength="10" readonly="readonly"/>
 				</div>
 				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('tipoPessoa')} ? has-error">
 					<label for="tipoPessoa" class="control-label">Tipo Pessoa</label>
-					<select class="form-control" name="tipoPessoa" th:field="*{tipoPessoa}" onchange="trocaPfPj()">
+					<select class="form-control" id="tipoPessoa" name="tipoPessoa" th:field="*{tipoPessoa}" onchange="trocaPfPj()">
 						<option value=""></option>
 						<option th:value="PF" th:text="Física"></option>
 						<option th:value="PJ" th:text="Jurídica"></option>
                     </select>
              	</div>
 				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('cpfCnpj')} ? has-error">
-					<label id="lbCpfCnpj" for="cpfCnpj" class="control-label">CPF</label>
-					<input type="text" class="form-control" id="cpfCnpj" th:field="*{cpfCnpj}" onkeypress="mascara(this,cpf)"/>
+					<label id="lbCpfCnpj" for="cpfCnpjCliente" class="control-label">CPF</label>
+					<input type="text" class="form-control js-busca-cliente" id="cpfCnpjCliente" th:field="*{cpfCnpj}" onkeypress="mascara(this,cpf)" th:href="@{/cliente/buscarporcpfcnpj/}"/>
 				</div>
 			</div>
       		
@@ -55,15 +56,15 @@
 			<div class="row">			
 				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('telefone')} ? has-error">
 					<label for="telefone" class="control-label">Telefone</label>
-					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" maxlength="14"/>
+					<input type="text" class="form-control" id="telefone" th:field="*{telefone}" onkeypress="mascara(this,tele_fone)" maxlength="14"/>
 				</div>
 				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('tipoPessoa')} ? has-error">
 					<label for="celular" class="control-label">Celular</label>
-					<input type="text" class="form-control" id="celular" th:field="*{celular}" maxlength="15"/>
+					<input type="text" class="form-control" id="celular" th:field="*{celular}"  maxlength="15" />
              	</div>
 				<div class="col-md-6 form-group" th:classAppend="${#fields.hasErrors('email')} ? has-error">
 					<label for="email" class="control-label">Email</label>
-					<input type="text" class="form-control" id="cpfCnpj" th:field="*{email}"/>
+					<input type="text" class="form-control" id="email" th:field="*{email}"/>
 				</div>
 			</div>
 			<div class="row">			
@@ -105,7 +106,7 @@
 			<hr/>
 			
 			<div class="col-md-12 form-group text-center">
-				<button type="submit" class="btn btn-lg btn-danger col-md-3" style="margin-right: 10px">Limpar</button>
+				<input type="button" class="btn btn-lg btn-danger col-md-3" style="margin-right: 10px" onclick="limpaCampos(true);" value="Limpar"> </input>
 				<button type="submit" class="btn btn-lg btn-success col-md-3">Salvar</button>
 			</div>
 		

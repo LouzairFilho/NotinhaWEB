@@ -3,6 +3,7 @@ package com.notinha.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -38,16 +39,26 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Cliente cliente, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
-			System.out.println("deu erro");
 			return CADASTRO_VIEW;
 			
 		}
 			
 			clienteSevice.salvar(cliente);
-			System.out.println("Salvou");
-			attributes.addFlashAttribute("mensagem", "Produto salvo com sucesso!");
+			attributes.addFlashAttribute("msg", "Cliente salvo com sucesso!");
 			return "redirect:/cliente/novo";
 	
+	}
+	
+	
+	
+	@RequestMapping("/buscarporcpfcnpj/{cpfCnpj}")
+	public ResponseEntity<Cliente> buscaByCodigo(@PathVariable("cpfCnpj") String cpfCnpj,RedirectAttributes attributes) {
+		Cliente cliente = new Cliente();
+		cliente.setCpfCnpj(cpfCnpj);
+		cliente = clienteSevice.buscaByCpfCnpj(cliente);
+		
+		return ResponseEntity.ok(cliente);
+			
 	}
 	
 	@RequestMapping("/pesquisa")
@@ -74,8 +85,7 @@ public class ClienteController {
 	public String exclir(@PathVariable("id") Integer id,RedirectAttributes attributes) {
 
 		clienteSevice.excluir(id);
-
-		attributes.addFlashAttribute("mensagem", "Produto Excluido com Sucesso!");
+		attributes.addFlashAttribute("msg", "Cliente Excluido com Sucesso!");
 		return "redirect:/cliente/pesquisa";
 	}
 }

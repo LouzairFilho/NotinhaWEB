@@ -125,6 +125,12 @@
 
 				<div class="row pad-top">
 					<div class="conteudo-pagina">
+						<div class="container-fluid">
+							<div class="alert alert-success alert-dismissible" th:if="${msg != null}">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<label th:text="${msg}"></label>
+							</div>
+						</div>
 						<section layout:fragment="conteudo">
 							<p>Conteúdo principal</p>
 						</section>
@@ -157,6 +163,8 @@
 	<script th:src="@{/js/buscaCEP.js}"></script>
 	<script th:src="@{/js/clienteJS.js}"></script>
 	<script th:src="@{/js/mascara.js}"></script>
+	<script th:src="@{/js/produto.js}"></script>
+	<script th:src="@{/js/notinha.js}"></script>
 	
 </body>
 </html>

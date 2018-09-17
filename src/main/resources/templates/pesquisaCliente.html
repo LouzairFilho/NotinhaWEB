@@ -24,8 +24,8 @@
 					<tr class="tituloTabela">
 						<th class="text-center col-md-1">codigo</th>
 						<th class="text-center col-md-5">Cliente</th>
+						<th class="text-center col-md-3">Fantasia</th>
 						<th class="text-center col-md-2">CPF / CNPJ</th>
-						<th class="text-center col-md-3">Telefones</th>
 						<th class="text-center col-md-1">#</th>
 						
 
@@ -39,10 +39,9 @@
 						<td th:text="${cli.id}"></td>
 						<td >
 							<span th:text="${cli.nomeRazao}" ></span><br/>
-							<span th:text="${cli.nomeFantasia}" ></span>
 						</td>
+						<td th:text="${cli.nomeFantasia}" class="text-center"></td>
 						<td th:text="${cli.cpfCnpjView}" class="text-center"></td>
-						<td th:text="${cli.telefones}" class="text-center"></td>
 						
 						
 						<td class="text-center">

@@ -16,6 +16,10 @@ $('#confirmacaoExclusaoModal').on('show.bs.modal', function(event) {
 	
 	
 });
+$(function(){
+	
+	$("#celular").mask("(99) 9999?9-9999");
+}
 
 $(function(){
 	$('[rel="tooltip"]').tooltip();

@@ -6,15 +6,7 @@
 
 <head>
 <title>.:: Notinha WEB ::.</title>
-	<script type="text/javascript">
-	$("#valor").maskMoney({
-		thousands : ".",
-		decimal : ",",
-		symbol : "R$",
-		showSymbol : true,
-		symbolStay : true
-	});
-</script>
+	
 	
 
 </head>
@@ -24,19 +16,22 @@
 
 
 <section layout:fragment="conteudo">
-	<form  method="POST" th:action="@{/produto}" th:object="${produto}">
+	<form id="formCadProduto" method="POST" th:action="@{/produto}" th:object="${produto}">
 		
 		<div class="container-fluid" >
-			<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+			<div class="alert alert-danger alert-dismissible" th:if="${#fields.hasAnyErrors()}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<div th:each="detailedError : ${#fields.detailedErrors()}">
 					<span th:text="${detailedError.message}"></span>
 				</div>
 			</div>
-			<input type="hidden" th:field="*{id}" />
+			
+			
+			<input type="hidden" th:field="*{id}" id="idProduto" />
 			<div class="row">			
 				<div class="col-md-3 form-group" th:classAppend="${#fields.hasErrors('codigo')} ? has-error">
 					<label for="codigo" class="control-label">Código</label>
-					<input type="text" class="form-control" id="codigo" th:field="*{codigo}" maxlength="10"/>
+					<input type="text" class="form-control js-busca-produto" id="codigoProduto" th:field="*{codigo}"  maxlength="10" th:href="@{/produto/buscar/}"/>
 				</div>
 			</div>
 			
@@ -56,8 +51,8 @@
 			<hr/>
 			
 			<div class="col-md-12 form-group text-center">
-				<button type="submit" class="btn btn-lg btn-danger col-md-3" style="margin-right: 10px">Limpar</button>
-				<button type="submit" class="btn btn-lg btn-success col-md-3">Salvar</button>
+				<button type="button" class="btn btn-lg btn-danger col-md-3 js-limpa-produto" style="margin-right: 10px">Limpar</button>
+				<button type="submit" class="btn btn-lg btn-success col-md-3" >Salvar</button>
 			</div>
 		
 		</div><!-- div container-fluid   -->

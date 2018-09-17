@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,6 +28,9 @@ public class Produto {
 	
 	@NotNull(message = "O Valor é obrigatório")
 	private Double valor;
+	
+	@Transient
+	private String mensagem;
 
 	public Integer getId() {
 		return id;
@@ -58,6 +62,15 @@ public class Produto {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 	@Override

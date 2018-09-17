@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Cliente {
 
@@ -50,14 +52,13 @@ public class Cliente {
 	private String obs;
 	
 	@Transient
-	private String telefones;
-
-	@Transient
+	@JsonIgnore
 	private String cpfCnpjView;
 	
 	@Transient
 	private Boolean isAlteracao = false;
 
+	
 	public String getCpfCnpjView() throws java.text.ParseException {
 		if (this.tipoPessoa.equals("PF")) {
 			MaskFormatter mask;
@@ -87,19 +88,19 @@ public class Cliente {
 		this.tipoPessoa = tipoPessoa;
 	}
 
-	public String getTelefones() {
-		this.telefones = "";
-		if (!this.telefone.isEmpty()){
-			this.telefones = this.telefone;
-		}if(!this.telefones.isEmpty() && !this.celular.isEmpty()){
-			this.telefones = this.telefones +" - " + this.celular;
-		}
-		return telefones;
-	}
-
-	public void setTelefones(String telefones) {
-		this.telefones = telefones;
-	}
+//	public String getTelefones() {
+//		this.telefones = "";
+//		if (!this.telefone.isEmpty()){
+//			this.telefones = this.telefone;
+//		}if(!this.telefones.isEmpty() && !this.celular.isEmpty()){
+//			this.telefones = this.telefones +" - " + this.celular;
+//		}
+//		return telefones;
+//	}
+//
+//	public void setTelefones(String telefones) {
+//		this.telefones = telefones;
+//	}
 
 	public Boolean getIsAlteracao() {
 		return isAlteracao;

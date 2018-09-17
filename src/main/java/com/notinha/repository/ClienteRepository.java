@@ -11,7 +11,7 @@ import com.notinha.model.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
 	@Query("select c from Cliente c where c.cpfCnpj = :cpfcnpj")
-	Cliente buscaByCpfCNpj(@Param("cpfcnpj") String cpfcnpj);
+	List<Cliente> buscaByCpfCNpj(@Param("cpfcnpj") String cpfcnpj);
 	
 	@Query("select c from Cliente c where c.cpfCnpj like :cpfcnpj%")
 	List<Cliente> listarByCpfCNpj(@Param("cpfcnpj") String cpfcnpj);

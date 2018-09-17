@@ -53,9 +53,9 @@
 				<div class="col-md-2 form-group">
 					<label for="id" class="control-label">Código</label>
 					<div class="input-group">
-				      <input type="text" class="form-control" id="id" th:field="*{cliente.id}" />
+				      <input type="text" class="form-control " id="idCliente" th:field="*{cliente.id}" onblur="buscacliente(this)" th:href="@{/notinha/buscarcliente/}"/>
 				      <span class="input-group-btn">
-				        <button class="btn btn-danger" type="submit" name="addCliente">
+				        <button class="btn btn-danger js-busca-cliente-notinha" type="submit"  name="addCliente" th:href="@{/notinha/buscarcliente/}">
 				        	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 				        </button>
 				      </span>
@@ -64,11 +64,11 @@
 				
 				<div class="col-md-5 form-group">
 					<label for="id" class="control-label">Cliente</label>
-					<input type="text" class="form-control" id="id" th:field="*{cliente.nomeRazao}" />
+					<input type="text" class="form-control" id="nomeRazao" th:field="*{cliente.nomeRazao}" readonly="readonly" />
 				</div>
 				<div class="col-md-5 form-group">
 					<label for="id" class="control-label">Nome Fantasia</label>
-					<input type="text" class="form-control" id="id" th:field="*{cliente.nomeFantasia}" />
+					<input type="text" class="form-control" id="nomeFantasia" th:field="*{cliente.nomeFantasia}" readonly="readonly" />
 				</div>
 			</div>
 			

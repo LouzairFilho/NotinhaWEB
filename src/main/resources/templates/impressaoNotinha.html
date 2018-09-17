@@ -58,7 +58,9 @@
 		</tr>
 		<tr>
 			<td >
-				<label th:text="'Telefones: ' + *{cliente.telefones}"></label>
+				<label >Telefones:</label>
+				<label th:text="' ' + *{cliente.telefone}" th:if="*{cliente.telefone != null}"></label>
+				<label th:text="' '+*{cliente.celular} " th:if="*{cliente.celular != null}"></label>
 			</td>
 			<td></td>
 		</tr>
@@ -120,7 +122,9 @@
 		</tr>
 		<tr>
 			<td >
-				<label th:text="'Telefones: ' + *{cliente.telefones}"></label>
+				<label >Telefones:</label>
+				<label th:text="' ' + *{cliente.telefone}" th:if="*{cliente.telefone != null}"></label>
+				<label th:text="' '+*{cliente.celular} " th:if="*{cliente.celular != null}"></label>
 			</td>
 			<td></td>
 		</tr>

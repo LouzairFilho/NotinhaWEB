@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.notinha.model.Cliente;
 import com.notinha.model.ItemNotinha;
 import com.notinha.model.Notinha;
+import com.notinha.model.Produto;
 import com.notinha.model.Status;
 import com.notinha.service.ClienteService;
 import com.notinha.service.NotinhaService;
@@ -112,7 +115,17 @@ public class NotinhaController {
 		return mv;
 
 	}
-
+	
+	@RequestMapping("/buscarcliente/{id}")
+	public ResponseEntity<Cliente> buscaByCodigo(@PathVariable("id") Integer idCliente,RedirectAttributes attributes) {
+		Cliente cliente = new Cliente();
+		cliente.setId(idCliente);
+		cliente = clienteService.buscaById(cliente);
+		
+		return ResponseEntity.ok(cliente);
+			
+	}
+	
 	@RequestMapping(params = { "buscaProduto" }, method = RequestMethod.POST)
 	public ModelAndView buscaProduto(Notinha notinha) {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
