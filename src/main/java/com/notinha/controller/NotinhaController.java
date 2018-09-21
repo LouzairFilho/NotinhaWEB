@@ -211,7 +211,7 @@ public class NotinhaController {
 		notinha.setDataView(fmt.format(notinha.getDataNotinha()));
 		Double valor = notinha.getValorNotinha();
 		
-		notinha.setValorNotinha(new NumeroFormato().doubleDoisDecimais(valor));
+	//	notinha.setValorNotinha(new NumeroFormato().doubleDoisDecimais(valor));
 
 
 		mv.addObject("itemNotinha", notinha.getItemNotinha());
