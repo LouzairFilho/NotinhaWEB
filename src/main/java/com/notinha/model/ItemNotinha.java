@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.NumberFormat;
+
 @Entity
 public class ItemNotinha {
 
@@ -23,9 +25,11 @@ public class ItemNotinha {
 	private Integer quantidade;
 	
 	@NotNull
+	@NumberFormat(pattern = "0.00")
 	private Double valorItem;
 	
 	@NotNull
+	@NumberFormat(pattern = "0.00")
 	private Double valorTotal;
 
 	public Integer getId() {

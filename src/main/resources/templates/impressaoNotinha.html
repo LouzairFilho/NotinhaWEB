@@ -83,9 +83,9 @@
 			<tr th:each="it : ${itemNotinha}">
 				<td width="15%" style="padding-left: 5px" th:text="${it.produto.codigo}"></td>
 				<td width="40%" style="padding-left: 5px" th:text="${it.produto.descricao}"></td>
-				<td width="15%" align="center" th:text="'R$ '+${it.valorItem}"></td>
+				<td width="15%" align="center" th:text="'R$ '+${{it.valorItem}}"></td>
 				<td width="15%" align="center" th:text="${it.quantidade}"></td>
-				<td width="15%" align="center" th:text="'R$ '+${it.valorTotal}"></td>
+				<td width="15%" align="center" th:text="'R$ '+${{it.valorTotal}}"></td>
 			</tr>
 			</tbody>
 		</table>
@@ -94,7 +94,7 @@
 					<td width="55%" style="padding-left: 5px" ><b>  </b> </td>
 					<td width="15%" align="center"> <b> Totais </b>  </td>
 					<td width="15%" align="center" th:text="*{quantItens}"> > <b>  </b>  </td>
-					<td width="15%" align="center" th:text="'R$ '+*{valorNotinha}">> <b>   </b> </td>
+					<td width="15%" align="center" th:text="'R$ '+*{{valorNotinha}}">> <b>   </b> </td>
 				</tr>
 				
 			
@@ -142,7 +142,7 @@
 				<label th:text="'Quant: ' + *{quantItens}"></label>
 			</td>
 			<td>
-				<label th:text="'valor: ' + 'R$ '+*{valorNotinha}"></label>
+				<label th:text="'valor: ' + 'R$ '+*{{valorNotinha}}" ></label>
 			</td>
 			
 			</tr>

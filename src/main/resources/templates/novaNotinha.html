@@ -40,7 +40,7 @@
 					 		<h4> <label>Valor</label></h4>
 					 	</div>
 					 	<div>
-					 		<h1><label th:text="*{valorNotinha}"></label></h1>
+					 		<h1><label th:text="*{{valorNotinha}}"></label></h1>
 					 	</div>
 					 </div>
 					 
@@ -117,9 +117,9 @@
 						<tr th:each="it : ${itemNotinha}">
 							<td th:text="${it.produto.codigo}"></td>
 							<td th:text="${it.produto.descricao}"></td>
-							<td th:text="${it.valorItem}"></td>
+							<td th:text="${{it.valorItem}}"></td>
 							<td th:text="${it.quantidade}"></td>
-							<td th:text="${it.valorTotal}"></td>
+							<td th:text="${{it.valorTotal}}"></td>
 						</tr>
 						
 					</tbody>

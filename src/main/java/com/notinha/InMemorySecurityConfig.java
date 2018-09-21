@@ -13,7 +13,9 @@ public class InMemorySecurityConfig {
 			.inMemoryAuthentication()
 			.withUser("Louzair").password("jeovah").roles("PG_ADM")
 			.and()
-			.withUser("Altair").password("jeovah").roles("PG_ADM");
+			.withUser("Altair").password("jeovah").roles("PG_ADM")
+			.and()
+			.withUser("Adm").password("123").roles("PG_ADM");
 	}
 
 }

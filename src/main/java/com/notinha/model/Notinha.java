@@ -17,6 +17,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.NumberFormat;
+
 @Entity
 public class Notinha {
 
@@ -30,6 +32,7 @@ public class Notinha {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ItemNotinha> itemNotinha;
 
+	@NumberFormat(pattern = "0.00")
 	private Double valorNotinha;
 
 	@Temporal(TemporalType.DATE)

@@ -1,6 +1,7 @@
 package com.notinha.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import com.notinha.model.Status;
 import com.notinha.service.ClienteService;
 import com.notinha.service.NotinhaService;
 import com.notinha.service.ProdutoService;
+import com.notinha.util.NumeroFormato;
 import com.notinha.util.Relatorios;
 
 @Controller
@@ -36,6 +38,7 @@ public class NotinhaController {
 	private static final String CADASTRO_VIEW = "novaNotinha";
 	private static final String PESQUISA_VIEW = "pesquisaNotinha";
 	private static final String IMPESSAO_VIEW = "impressaoNotinha";
+	DecimalFormat df = new DecimalFormat("0.##");
 	
 
 	@Autowired
@@ -170,7 +173,10 @@ public class NotinhaController {
 		boolean produtoLancado = false;
 		for(int i = 1; notinha.getItemNotinha().size() >=i; i++ ){
 			if(!notinha.getItemNotinha().isEmpty()){
-				if (notinha.getItemNotinha().get(i-1).getProduto().getId() == notinha.getItem().getProduto().getId()){
+				Integer idprodutotela = notinha.getItem().getProduto().getId();
+				Integer idprodutoLista = notinha.getItemNotinha().get(i-1).getProduto().getId();
+				
+				if (idprodutoLista.equals(idprodutotela)){
 					notinha.getItemNotinha().get(i-1).setQuantidade(notinha.getItem().getQuantidade());
 					notinha.getItemNotinha().get(i-1).setValorItem(notinha.getItem().getValorItem());
 					notinha.getItemNotinha().get(i-1).setValorTotal(notinha.getItem().getValorTotal());
@@ -203,12 +209,13 @@ public class NotinhaController {
 		
 		
 		notinha.setDataView(fmt.format(notinha.getDataNotinha()));
+		Double valor = notinha.getValorNotinha();
 		
-		
-		
+		notinha.setValorNotinha(new NumeroFormato().doubleDoisDecimais(valor));
 
 
 		mv.addObject("itemNotinha", notinha.getItemNotinha());
+		mv.addObject("valorNotinhaView",String.format("%.2f", valor));
 		mv.addObject("notinha", notinha);
 		return mv;
 	}
