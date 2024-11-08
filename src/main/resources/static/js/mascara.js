@@ -79,7 +79,7 @@ function moeda(v){
 
 function imprimirNotinha() {
 	var conteudo = document.getElementById('div-notinha').innerHTML,
-	tela_impressao = window.open('about:blank');
+	tela_impressao = window.open('_blank');
 	
 	tela_impressao.document.write(conteudo);
 	tela_impressao.window.print();

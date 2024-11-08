@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  maven-build:
+    image: maven:3.8.6-openjdk-8  # Imagem do Maven com OpenJDK 11
+    command: mvn clean install -s /dev/null -U  # Ignora as configurações do arquivo settings.xml local
+    volumes:
+      - .:/usr/src/app  # Mapeia o diretório atual para o diretório no container
+    working_dir: /usr/src/app  # Define o diretório de trabalho dentro do container
+  app:
+    build: .  # Define que o Docker Compose usa o Dockerfile na pasta atual
+    container_name: spring_app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/seu_database
+      SPRING_DATASOURCE_USERNAME: seu_usuario
+      SPRING_DATASOURCE_PASSWORD: sua_senha
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"  # Porta da aplicação
+
+  db:
+    image: postgres:14  # Versão do Postgres desejada
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: seu_database
+      POSTGRES_USER: seu_usuario
+      POSTGRES_PASSWORD: sua_senha
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Persistência dos dados
+    ports:
+      - "5433:5433"
+
+volumes:
+  pgdata:

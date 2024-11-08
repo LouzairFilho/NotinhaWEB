@@ -217,6 +217,7 @@ public class NotinhaController {
 		mv.addObject("itemNotinha", notinha.getItemNotinha());
 		mv.addObject("valorNotinhaView",String.format("%.2f", valor));
 		mv.addObject("notinha", notinha);
+		mv.addObject("empresaEmitente", "Bord@rte Bordados Computadorizados");
 		return mv;
 	}
 	
